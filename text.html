@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Happy Birthday Shetu ❤️</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins,sans-serif}
+
+body{
+  background:linear-gradient(135deg,#e6d9ff,#f3e8ff);
+  min-height:100vh;
+  color:#333;
+  transition:0.5s;
+  overflow-x:hidden;
+}
+
+body.dark{
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  color:#fff;
+}
+
+.container{
+  max-width:1000px;
+  margin:auto;
+  padding:30px 20px;
+  text-align:center;
+}
+
+h1{
+  font-family:"Great Vibes",cursive;
+  font-size:4rem;
+  color:#b3005e;
+}
+body.dark h1{color:#ffb6c1}
+
+h2{margin:15px 0;font-weight:400}
+
+.card{
+  background:rgba(255,255,255,0.9);
+  padding:25px;
+  margin:25px 0;
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,0.15);
+}
+body.dark .card{background:rgba(0,0,0,0.6)}
+
+button{
+  padding:10px 20px;
+  border:none;
+  border-radius:30px;
+  background:#ff0055;
+  color:white;
+  cursor:pointer;
+  margin:5px;
+}
+button:hover{opacity:0.85}
+
+.heart{
+  font-size:2.5rem;
+  animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.2)}
+  100%{transform:scale(1)}
+}
+
+/* Floating hearts */
+.floating-heart{
+  position:fixed;
+  bottom:-50px;
+  font-size:24px;
+  animation:floatUp 6s linear infinite;
+  color:rgba(255,0,85,0.6);
+  pointer-events:none;
+}
+@keyframes floatUp{
+  from{transform:translateY(0);opacity:1}
+  to{transform:translateY(-110vh);opacity:0}
+}
+
+/* Gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+}
+
+.gallery img {
+  width: 100%;          /* full width of each grid cell */
+  height: 400px;        /* fixed height */
+  object-fit: cover;    /* crop to fill the height without distortion */
+  object-position: center; /* center the image inside the box */
+  border-radius: 15px;
+  display: block;
+}
+
+/* Optional: for very small screens, reduce height */
+@media (max-width: 480px) {
+  .gallery img {
+    height: 150px;
+  }
+}
+
+
+.timeline p{
+  margin:10px 0;
+  font-size:1.1rem;
+  animation:fadeInUp 1.5s ease forwards;
+}
+@keyframes fadeInUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+
+.heartbeat{
+  font-size:4rem;
+  animation:beat 1.2s infinite;
+  cursor:pointer;
+}
+.heartbeat:hover{
+  animation:beat 0.6s infinite;
+}
+@keyframes beat{
+  0%{transform:scale(1)}
+  25%{transform:scale(1.2)}
+  40%{transform:scale(1)}
+  60%{transform:scale(1.3)}
+  100%{transform:scale(1)}
+}
+.cosmic-card{
+  overflow:hidden;
+}
+
+.cosmic-box{
+  position:relative;
+  height:320px;
+  border-radius:22px;
+  background:radial-gradient(circle at center,#3b2a5f,#120b1f);
+  margin-top:15px;
+}
+
+/* Canvas */
+#cosmicCanvas{
+  position:absolute;
+  inset:0;
+}
+
+/* Souls */
+.soul{
+  position:absolute;
+  top:50%;
+  font-size:3rem;
+  transform:translateY(-50%);
+  animation:floatSoul 5s ease-in-out infinite;
+}
+
+.soul-left{
+  left:12%;
+  animation:moveLeftSoul 10s forwards;
+}
+
+.soul-right{
+  right:12%;
+  animation:moveRightSoul 10s forwards;
+}
+
+@keyframes moveLeftSoul{
+  to{left:46%}
+}
+@keyframes moveRightSoul{
+  to{right:46%}
+}
+@keyframes floatSoul{
+  0%,100%{transform:translateY(-50%)}
+  50%{transform:translateY(-65%)}
+}
+
+/* Soul Line */
+.soul-line{
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:0;
+  height:2px;
+  background:linear-gradient(90deg,#c084fc,#8b5cf6,#c084fc);
+  transform:translate(-50%,-50%);
+  box-shadow:0 0 20px #a855f7;
+  animation:connectLine 10s forwards;
+}
+@keyframes connectLine{
+  0%{width:0}
+  100%{width:180px}
+}
+
+/* Texts */
+.cosmic-text{
+  position:absolute;
+  width:100%;
+  text-align:center;
+  font-weight:600;
+  color:#f5f3ff;
+  opacity:0;
+  text-shadow:
+    0 0 10px #c084fc,
+    0 0 30px #8b5cf6;
+}
+
+.name-text{
+  top:20%;
+  font-size:2rem;
+  animation:showName 6s forwards;
+}
+
+.ss-text{
+  bottom:30%;
+  font-size:1.6rem;
+  animation:showSS 8s forwards;
+}
+
+.final-text{
+  bottom:15px;
+  font-size:1.3rem;
+  animation:showFinal 12s forwards;
+}
+
+@keyframes showName{
+  0%,40%{opacity:0}
+  100%{opacity:1}
+}
+@keyframes showSS{
+  0%,60%{opacity:0}
+  100%{opacity:1}
+}
+@keyframes showFinal{
+  0%,80%{opacity:0}
+  100%{opacity:1}
+}
+
+
+/* Slider */
+.slider{
+  font-size:1.2rem;
+  min-height:70px;
+}
+
+/* Fireworks */
+#fireworks{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  z-index:999;
+}
+
+.fireText{
+  position:fixed;
+  font-size:2rem;
+  font-weight:600;
+  color:#fff;
+  text-shadow:0 0 10px #ff69b4,0 0 25px #ff1493;
+  animation:fadeText 2s ease forwards;
+  pointer-events:none;
+}
+@keyframes fadeText{
+  from{opacity:1;transform:scale(0.6)}
+  to{opacity:0;transform:scale(1.8)}
+}
+
+footer{margin-top:40px;font-size:1rem}
+</style>
+</head>
+<audio autoplay loop volume="0.3">
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_2b6b4b60c2.mp3">
+</audio>
+
+<body>
+
+<canvas id="fireworks"></canvas>
+
+<div class="container">
+  <h1>Happy Birthday My Love</h1>
+  <h2>🎂 Shetu • 28 December 🎂</h2>
+
+  <!-- Controls -->
+  <div class="card">
+    <button onclick="toggleMusic()">🎵 Music</button>
+    <button onclick="toggleDark()">🌙 Night Mode</button>
+    <button onclick="showSurprise()">🎁 Surprise</button>
+  </div>
+
+  <!-- Countdown -->
+  <div class="card">
+    <h3>⏳ Birthday Countdown</h3>
+    <p id="countdown"></p>
+  </div>
+
+  <div class="card">
+  <h3>💓 The Heart That Beats for You</h3>
+  <div class="heartbeat">❤️</div>
+  <p>This heart beats only for you, Shetu.</p>
+</div>
+
+  <!-- Love Letter -->
+  <div class="card">
+    <p>
+      You are not just my wife, you are my peace, my happiness, my forever.
+    </p>
+    <div class="heart">❤️</div>
+    <p>
+      I promise to love you more every single day of my life.
+    </p>
+  </div>
+
+
+
+  <!-- Slider -->
+  <div class="card">
+    <h3>💬 Words From My Heart</h3>
+    <div class="slider" id="sliderText"></div>
+  </div>
+
+  <!-- I Love You Languages -->
+  <!-- <div class="card">
+    <h3>🌍 I Love You in Many Languages</h3>
+    <p>English: I Love You</p>
+    <p>Bangla: আমি তোমাকে ভালোবাসি</p>
+    <p>Hindi: मैं तुमसे प्यार करता हूँ</p>
+    <p>Arabic: أحبك</p>
+    <p>French: Je t’aime</p>
+    <p>Japanese: 愛してる</p>
+    <p>Korean: 사랑해</p>
+  </div> -->
+<div class="card cosmic-card">
+  <h3>🌌 Our Souls Met Before</h3>
+
+  <div class="cosmic-box">
+    <canvas id="cosmicCanvas"></canvas>
+
+    <!-- Souls -->
+    <div class="soul soul-left">💜</div>
+    <div class="soul soul-right">💜</div>
+
+    <!-- Soul Line -->
+    <div class="soul-line"></div>
+
+    <!-- Destiny Texts -->
+    <div class="cosmic-text name-text">Shetu</div>
+    <div class="cosmic-text ss-text">S + S</div>
+    <div class="cosmic-text final-text">
+      And we met again… as husband & wife 💍
+    </div>
+  </div>
+
+  <p style="margin-top:15px;">
+    Some love is written in the stars.<br>
+    Ours was written before time.
+  </p>
+</div>
+
+  <!-- Gallery -->
+  <div class="card">
+    <h3>📸 Our Memories</h3>
+    <div class="gallery">
+      <img src="https://i.ibb.co.com/4Z3J0RhB/b4.jpg">
+      <img src="https://i.ibb.co.com/Z1GwBF4f/b1.jpg">
+      <img src="https://i.ibb.co.com/WWXLL0Zq/b2.jpg">
+      <img src="https://i.ibb.co.com/LzwTv5r1/b3.jpg">
+    </div>
+
+  </div>
+
+<div class="card">
+  <button onclick="showComfort()">🕯 If You Ever Feel Alone</button>
+</div>
+
+
+  <div class="card">
+  <h3>🌠 Promises I Will Always Keep</h3>
+  <div class="timeline">
+    <p>💍 Always choose you</p>
+    <p>🌧 Hold you in hard times</p>
+    <p>🌈 Celebrate your happiness</p>
+    <p>👵👴 Grow old holding your hand</p>
+  </div>
+</div>
+
+
+  <footer>
+    <p>Forever Yours ❤️<br><strong>Your Husband</strong></p>
+  </footer>
+</div>
+
+<!-- Audio -->
+<audio id="bgMusic" loop>
+  
+</audio>
+
+<audio id="fireSound">
+  <source src="https://www.soundjay.com/explosion/sounds/explosion-01.mp3">
+</audio>
+
+<script>
+  /* Cosmic Starfield + Constellation */
+const cosmicCanvas=document.getElementById("cosmicCanvas");
+const cctx=cosmicCanvas.getContext("2d");
+
+function resizeCosmic(){
+  cosmicCanvas.width=cosmicCanvas.offsetWidth;
+  cosmicCanvas.height=cosmicCanvas.offsetHeight;
+}
+resizeCosmic();
+window.addEventListener("resize",resizeCosmic);
+
+const stars=[];
+for(let i=0;i<140;i++){
+  stars.push({
+    x:Math.random()*cosmicCanvas.width,
+    y:Math.random()*cosmicCanvas.height,
+    r:Math.random()*1.5+0.4,
+    s:Math.random()*0.4+0.2
+  });
+}
+
+/* S + S constellation points */
+const constellation=[
+  {x:0.35,y:0.35},{x:0.4,y:0.3},{x:0.45,y:0.35},
+  {x:0.55,y:0.35},{x:0.6,y:0.3},{x:0.65,y:0.35}
+];
+
+function animateCosmic(){
+  cctx.clearRect(0,0,cosmicCanvas.width,cosmicCanvas.height);
+
+  // Stars
+  stars.forEach(star=>{
+    cctx.beginPath();
+    cctx.arc(star.x,star.y,star.r,0,Math.PI*2);
+    cctx.fillStyle="#ede9fe";
+    cctx.fill();
+
+    star.y+=star.s;
+    if(star.y>cosmicCanvas.height){
+      star.y=0;
+      star.x=Math.random()*cosmicCanvas.width;
+    }
+  });
+
+  // Constellation
+  cctx.strokeStyle="#c084fc";
+  cctx.lineWidth=1;
+  cctx.beginPath();
+  constellation.forEach((p,i)=>{
+    const x=p.x*cosmicCanvas.width;
+    const y=p.y*cosmicCanvas.height;
+    i===0?cctx.moveTo(x,y):cctx.lineTo(x,y);
+  });
+  cctx.stroke();
+
+  requestAnimationFrame(animateCosmic);
+}
+animateCosmic();
+
+/* Floating hearts */
+setInterval(()=>{
+  const h=document.createElement("div");
+  h.className="floating-heart";
+  h.innerHTML="❤️";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=4+Math.random()*4+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),7000);
+},500);
+
+/* Music */
+let music=false;
+function toggleMusic(){
+  const m=document.getElementById("bgMusic");
+  music?m.pause():m.play();
+  music=!music;
+}
+
+/* Dark mode */
+function toggleDark(){
+  document.body.classList.toggle("dark");
+}
+
+/* Surprise */
+function showSurprise(){
+  alert("🎉 I Love You More Than Anything, Shetu ❤️");
+}
+
+/* Countdown */
+function updateCountdown(){
+  const bday=new Date("December 28, 2025 00:00:00").getTime();
+  const now=new Date().getTime();
+  const d=bday-now;
+  if(d<0){
+    document.getElementById("countdown").innerHTML="🎂 Happy Birthday My Love 🎂";
+    return;
+  }
+  const days=Math.floor(d/(1000*60*60*24));
+  const hrs=Math.floor((d%(1000*60*60*24))/(1000*60*60));
+  const mins=Math.floor((d%(1000*60*60))/(1000*60));
+  document.getElementById("countdown").innerHTML=
+    `${days} days ${hrs} hours ${mins} minutes`;
+}
+setInterval(updateCountdown,1000);
+
+/* Slider */
+const texts=[
+  "You are my today and all of my tomorrows ❤️",
+  "Every heartbeat whispers your name 💖",
+  "Life is beautiful because of you 💕",
+  "I fall in love with you every single day 💍"
+];
+let i=0;
+setInterval(()=>{
+  document.getElementById("sliderText").innerText=texts[i];
+  i=(i+1)%texts.length;
+},3000);
+function showComfort(){
+  alert("Whenever you feel alone, remember — my heart is always with you ❤️");
+}
+
+/* Fireworks */
+const canvas=document.getElementById("fireworks");
+const ctx=canvas.getContext("2d");
+const fireSound=document.getElementById("fireSound");
+
+function resize(){
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+}
+resize();
+window.addEventListener("resize",resize);
+
+class Particle{
+  constructor(x,y,color){
+    this.x=x;this.y=y;this.color=color;
+    this.radius=Math.random()*2+1;
+    this.vx=(Math.random()-0.5)*7;
+    this.vy=(Math.random()-0.5)*7;
+    this.life=80;
+  }
+  update(){this.x+=this.vx;this.y+=this.vy;this.life--;}
+  draw(){
+    ctx.beginPath();
+    ctx.arc(this.x,this.y,this.radius,0,Math.PI*2);
+    ctx.fillStyle=this.color;
+    ctx.fill();
+  }
+}
+
+let particles=[];
+function explode(x,y){
+  const colors=["#ff004c","#ffcc00","#00eaff","#ff77aa","#ffffff"];
+  for(let i=0;i<100;i++){
+    particles.push(new Particle(x,y,colors[Math.random()*colors.length|0]));
+  }
+  fireSound.currentTime=0;
+  fireSound.play();
+
+  const text=document.createElement("div");
+  text.className="fireText";
+  text.style.left=x-120+"px";
+  text.style.top=y-20+"px";
+  text.innerText="I Love You Shetu ❤️";
+  document.body.appendChild(text);
+  setTimeout(()=>text.remove(),2000);
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let i=particles.length-1;i>=0;i--){
+    particles[i].update();
+    particles[i].draw();
+    if(particles[i].life<=0)particles.splice(i,1);
+  }
+  requestAnimationFrame(animate);
+}
+animate();
+
+setInterval(()=>{
+  explode(Math.random()*canvas.width,Math.random()*canvas.height*0.6);
+},1800);
+
+window.addEventListener("click",e=>{
+  explode(e.clientX,e.clientY);
+});
+</script>
+
+</body>
+</html>
